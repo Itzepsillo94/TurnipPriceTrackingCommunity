@@ -16,3 +16,8 @@ body {
       -moz-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
       -box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
   }
+  .card-img-topb {
+    width: 100%;
+    height: 14vh;
+    object-fit: fill;
+    }
