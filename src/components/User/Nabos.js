@@ -13,13 +13,11 @@ function Nabos(props) {
             userid: props.d.userid
         }
 
-        axios.patch('https://turnipsxdevf.firebaseio.com/nabos.json',body).then(data => setPrecio(precio))
-        historia.push("/")
+        axios.patch('https://turnipsxdevf.firebaseio.com/nabos.json',body).then(data => setPrecio(precio)).then(historia.push("/"))
     }
     const refreshNabos = (event,idx) => {
         console.log(`Valor precambio: ${precio} y indice ${idx}`)
-       // precio.map()
-       precio[idx]=event.target.value;
+        precio[idx]=event.target.value;
         console.log(`Cambiado a: ${precio} y indice ${idx}`)
     }
 

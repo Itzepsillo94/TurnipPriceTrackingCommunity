@@ -7,10 +7,8 @@ const Cards = (props) => {
     const apirul = "https://api.ac-turnip.com/data/?f=";
     const [pnabos, setPnabo] = useState({});
     const [predicciones, setPredicciones] = useState('https://ac-turnip.com/p-.png');
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      //'Content-Type': 'application/json',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+    const options = {
+        headers: {'Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept','mode': 'no-cors'}
     };
 
     const getPnabos = () => {
@@ -27,19 +25,9 @@ const Cards = (props) => {
     const getPredictions = (datos) =>{
         const mapa =Object.keys(datos).map((obj)=>datos[obj].precios);
         const precios = mapa.toString().replace(/,/g, "-");
-        //console.log(precios);
-        const targetUrl = `${apirul}${precios}`;
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        //console.log(proxyUrl + targetUrl);
-        fetch(proxyUrl + targetUrl).then(response => response.json()).then(data => setPredicciones(data.preview));
-        //console.log(predicciones);
-        // axios.get(`${apirul}${precios}`,{headers})
-        // .then(({data}) => {
-        //     //console.log(`${data} <--`);
-        //     setPredicciones(data.filter);
-        //     console.log('Me conecte!')
-        // })
-        // .catch((err) => console.log(`${err} FaLlE`));
+        //const targetUrl = `${apirul}${precios}`;
+       // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        axios.get(`data/?f=${precios}`,options).then(response => setPredicciones(response.data.preview));
     }
     //useEffect(()=>getPredictions(pnabos),[pnabos]);
 

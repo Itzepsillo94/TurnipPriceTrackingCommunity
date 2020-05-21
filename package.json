@@ -1,5 +1,6 @@
 {
   "name": "crossingdevf",
+  "proxy": "https://api.ac-turnip.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
