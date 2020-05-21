@@ -6,9 +6,6 @@ import img3 from '../../img/pred.png'
 
 
 const Main = () => {
-    const populateCards = ()=>{
-        
-    }
     return (
         <div className="container">
             <div className="jumbotron jumbotron-fluid">
@@ -18,7 +15,7 @@ const Main = () => {
                 <Cards head="Top Islas" cbg={img} ctitle="Islas" ctext={['Nabosland: $400','Peaches: $400','Koopa: $400','Marios: $400','devf: $400']} 
                 link={['#',"Ver mas islas"]} />
                 <Cards cbg={img2} ctext={''} render="form" />
-                <Cards cbg={img3} ctext={''} render="grph" url="https://ac-turnip.com/p-104-83-75-72.png" />
+                <Cards cbg={img3} ctext={''} render="grph" />
             </div>
         </div>
     )

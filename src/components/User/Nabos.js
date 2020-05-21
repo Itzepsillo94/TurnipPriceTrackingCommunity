@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 function Nabos(props) {
+    const historia = useHistory();
     const [precio, setPrecio] = useState(props.d.precios);
     const handleChange = (event) => {
         const body = {};
@@ -12,6 +14,7 @@ function Nabos(props) {
         }
 
         axios.patch('https://turnipsxdevf.firebaseio.com/nabos.json',body).then(data => setPrecio(precio))
+        historia.push("/")
     }
     const refreshNabos = (event,idx) => {
         console.log(`Valor precambio: ${precio} y indice ${idx}`)
@@ -77,7 +80,7 @@ function Nabos(props) {
                     </div>
                 </div>
                 <br/>
-                <a href="#" className="btn btn-primary" onClick={handleChange}>Calcular</a>
+                <a href={"#"} className="btn btn-primary" onClick={handleChange}>Calcular</a>
             </form>
     )
 }

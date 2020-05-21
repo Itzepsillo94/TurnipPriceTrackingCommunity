@@ -6,7 +6,12 @@ const Cards = (props) => {
     const dbnabos = "https://turnipsxdevf.firebaseio.com/nabos.json";
     const apirul = "https://api.ac-turnip.com/data/?f=";
     const [pnabos, setPnabo] = useState({});
-    const [predicciones, setPredicciones] = useState([]);
+    const [predicciones, setPredicciones] = useState('https://ac-turnip.com/p-.png');
+    const headers = {
+      'Access-Control-Allow-Origin': '*',
+      //'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+    };
 
     const getPnabos = () => {
         axios.get(`${dbnabos}?orderBy="userid"&startAt=1&endAt=1`)
@@ -20,28 +25,35 @@ const Cards = (props) => {
     useEffect(()=>getPnabos(),[]);
 
     const getPredictions = (datos) =>{
-        console.log(`Predict on: ${datos.precios}`);
-        const precios = datos.precios.toString().replace(/,/g, "-");
-        console.log(precios);
-        axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
-        axios.get(`${apirul}${precios}`)
-        .then(({data}) => {
-            console.log(`${data} <--`);
-            setPredicciones(data.filter);
-        })
-        .catch((err) => console.log(err));
+        const mapa =Object.keys(datos).map((obj)=>datos[obj].precios);
+        const precios = mapa.toString().replace(/,/g, "-");
+        //console.log(precios);
+        const targetUrl = `${apirul}${precios}`;
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        //console.log(proxyUrl + targetUrl);
+        fetch(proxyUrl + targetUrl).then(response => response.json()).then(data => setPredicciones(data.preview));
+        //console.log(predicciones);
+        // axios.get(`${apirul}${precios}`,{headers})
+        // .then(({data}) => {
+        //     //console.log(`${data} <--`);
+        //     setPredicciones(data.filter);
+        //     console.log('Me conecte!')
+        // })
+        // .catch((err) => console.log(`${err} FaLlE`));
     }
+    //useEffect(()=>getPredictions(pnabos),[pnabos]);
 
     const form = (parametro, url) => {
         if (parametro === "form"){
             return (
-                Object.keys(pnabos).map((nabo)=>(<Nabos id={nabo} d={pnabos[nabo]} />))
+                Object.keys(pnabos).map((nabo)=>(<Nabos id={nabo} d={pnabos[nabo]} getPnabos={getPnabos} />))
             );
         }else {
-            Object.keys(pnabos).map((nabo)=>(getPredictions(pnabos[nabo])));
-            console.log(predicciones);
+            //Object.keys(pnabos).map((nabo)=>(getPredictions(pnabos[nabo])));
+            getPredictions(pnabos);
+            console.log(`Este deberia ser el link ${predicciones}`);
             return (
-                <img src={url} alt="Grafico bolsa" />
+                <img src={predicciones} alt="Grafico bolsa" />
             )
         }
     }
