@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import axios from 'axios'
-import { useHistory } from 'react-router-dom'
+import React, {useState,useEffect} from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function Nabos(props) {
     const historia = useHistory();
@@ -20,6 +20,12 @@ function Nabos(props) {
         precio[idx]=event.target.value;
         console.log(`Cambiado a: ${precio} y indice ${idx}`)
     }
+
+    useEffect(()=>{
+        history.push('/');
+        console.log(1);
+        
+    },handleChange);
 
     return (
         <form>
@@ -78,7 +84,7 @@ function Nabos(props) {
                     </div>
                 </div>
                 <br/>
-                <a href={"#"} className="btn btn-primary" onClick={handleChange}>Calcular</a>
+                <a href={"#"} className="btn btn-primary" type="submit" onClick={handleChange}>Calcular</a>
             </form>
     )
 }
