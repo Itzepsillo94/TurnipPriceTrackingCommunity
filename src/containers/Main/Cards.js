@@ -1,66 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import Nabos from '../../components/User/Nabos'
+import axios from 'axios'
 
 const Cards = (props) => {
+    const dbnabos = "https://turnipsxdevf.firebaseio.com/nabos.json";
+    const apirul = "https://api.ac-turnip.com/data/?f=";
+    const [pnabos, setPnabo] = useState({});
+
+    const getPnabos = () => {
+        axios.get(`${dbnabos}?orderBy="userid"&startAt=1&endAt=1`)
+        .then(({data})=>{
+            //console.log(Object.keys(data));
+            //Object.keys(data).map((item)=>(console.log(data[item].precios[0])))
+            setPnabo(data);
+        })
+        .catch((err) => console.log(err));
+    }
+    useEffect(()=>getPnabos(),[]);
+
     const form = (parametro, url) => {
-        if (parametro == "form")
+        if (parametro === "form"){
             return (
-            <form>
-                <div className="form-group row">
-                    <label for="pdom" className="col-sm-6 col-form-label">Compre en:</label>
-                    <div className="col-sm-6">
-                        <input type="number" className="form-control" id="pdom" placeholder="99" />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Lunes AM" />
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Lunes PM" />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Martes AM" />
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Martes PM" />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Miercoles AM" />
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Miercoles PM"/>
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Jueves AM"/>
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Jueves PM"/>
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Viernes AM"/>
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Viernes PM"/>
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Sabado AM"/>
-                    </div>
-                    <div className="col">
-                        <input type="text" className="form-control" placeholder="Sabado PM"/>
-                    </div>
-                </div>
-            </form>);
-        else {
+                Object.keys(pnabos).map((nabo)=>(<Nabos d={pnabos[nabo].precios}/>))
+            );
+        }else {
             return (
                 <img src={url} alt="Grafico bolsa" />
             )
@@ -69,7 +32,7 @@ const Cards = (props) => {
     return (
         <div className="col-md-auto">
             <div className="card border-dark mb-3" style={
-                props.render == "grph"
+                props.render === "grph"
                 ?  {width: "auto"}
                 : {width: 18 +"rem"}}
             >

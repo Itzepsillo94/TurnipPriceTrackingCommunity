@@ -6,7 +6,7 @@ import './Navbar.css';
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <img src={logo} width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy" />
+            <img src={logo} width="30" height="30" className="d-inline-block align-top" alt="" loading="lazy" />
             <div className="nav">
             <NavLink className="navbar-brand" activeClassName="disable" to="/">Animal Crossing DevF</NavLink>
             </div>
