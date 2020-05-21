@@ -6,24 +6,40 @@ const Cards = (props) => {
     const dbnabos = "https://turnipsxdevf.firebaseio.com/nabos.json";
     const apirul = "https://api.ac-turnip.com/data/?f=";
     const [pnabos, setPnabo] = useState({});
+    const [predicciones, setPredicciones] = useState([]);
 
     const getPnabos = () => {
         axios.get(`${dbnabos}?orderBy="userid"&startAt=1&endAt=1`)
         .then(({data})=>{
             //console.log(Object.keys(data));
-            //Object.keys(data).map((item)=>(console.log(data[item].precios[0])))
+            //Object.keys(data).map((item)=>(console.log(data[item])))
             setPnabo(data);
         })
         .catch((err) => console.log(err));
     }
     useEffect(()=>getPnabos(),[]);
 
+    const getPredictions = (datos) =>{
+        console.log(`Predict on: ${datos.precios}`);
+        const precios = datos.precios.toString().replace(/,/g, "-");
+        console.log(precios);
+        axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+        axios.get(`${apirul}${precios}`)
+        .then(({data}) => {
+            console.log(`${data} <--`);
+            setPredicciones(data.filter);
+        })
+        .catch((err) => console.log(err));
+    }
+
     const form = (parametro, url) => {
         if (parametro === "form"){
             return (
-                Object.keys(pnabos).map((nabo)=>(<Nabos d={pnabos[nabo].precios}/>))
+                Object.keys(pnabos).map((nabo)=>(<Nabos id={nabo} d={pnabos[nabo]} />))
             );
         }else {
+            Object.keys(pnabos).map((nabo)=>(getPredictions(pnabos[nabo])));
+            console.log(predicciones);
             return (
                 <img src={url} alt="Grafico bolsa" />
             )
