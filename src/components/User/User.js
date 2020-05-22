@@ -6,13 +6,13 @@ import './User.css';
 const User = () => {
 
     const ID = 'user-2648a';
-    const URL = `https://${ID}.firebaseio.com/task.json`;
+    const URL = `https://${ID}.firebaseio.com/user.json`;
 
     const [name,setName] = useState('');
     const [lname,setLname] = useState('');
     const [passw,setPassw] = useState('');
     const [loading,setLoading] = useState(false);
-    //const [error,setError] = useState('');
+    const [error,setError] = useState('');
     const history = useHistory();
     const nabo = 0;
 
@@ -45,11 +45,11 @@ const User = () => {
                 history.push('/');
             })
             .catch(() => {
-                //setError("Verificar Datos");
+                setError("Verificar Datos");
                 setLoading(false);
             });
         }else{
-            //setError("Verificar Datos");
+            setError("Verificar Datos");
             setLoading(false);
         }
     }
@@ -79,6 +79,9 @@ const User = () => {
                 </div>
             </div>
             <br/>
+            <div className="text-danger">
+                {error}
+            </div>
             <div className="form-group row">
                 <div className="col-sm-10">
             { loading
