@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import {NavLink} from 'react-router-dom';
-
 
 function Nabos(props) {
     const history = useHistory();
@@ -10,7 +8,6 @@ function Nabos(props) {
 
 
     const handleChange = (event) => {
-//        setLoad(true);
         const body = {};
         body[props.id] =
         {
@@ -23,9 +20,6 @@ function Nabos(props) {
             setPrecio(precio)
         })
         
-
-
-    //
     }
     const refreshNabos = (event,idx) => {
         
@@ -68,8 +62,3 @@ function Nabos(props) {
 }
 
 export default Nabos
-/* <NavLink className="navbar-brand" activeClassName="disable" to="/">Animal Crossing DevF</NavLink>
-
-                <a className="btn btn-primary" onClick={()=>handleChange()}>Calcular</a>
-       <button onClick={() =>confirmData()} type="submit" className="btn btn-primary">Login</button>
-*/
