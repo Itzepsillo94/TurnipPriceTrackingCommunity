@@ -7,18 +7,19 @@ const API_Character = () => {
     const [gender, setgender] = useState('')
     const [birthday, setbirthday] = useState('')
     const [personality, setpersonality] = useState('')
-
+    const [name, setname] = useState('')
     const [Texto, setTexto] = useState('')
 
     const ObtenerGitf = () => {
         setTexto(Math.round((Math.random() * 10)*(Math.random() * 9)))
         axios.get(`http://acnhapi.com/villagers/${Texto}`)
             .then(({ data }) => {
-                console.log(data)
+                console.log(data.name['name-sp'])
+                setname(data.name['name-sp'])
                 setgender(data.gender)
                 setbirthday(data.birthday)
                 setpersonality(data.personality)
-            
+                
 
             })
             .catch((err) => console.error(err))
@@ -41,13 +42,13 @@ const API_Character = () => {
                 <br></br>
                     <img src={`http://acnhapi.com/icons/villagers/${Texto}`} />
                 <div className= "text">
+                    
+                <h2>Name : {name}</h2>
                 <h2>Gender : {gender}</h2>
                 <h2>Birthday : {birthday}</h2>
                 <h2>Personality : {personality}</h2>
                 
                 </div>
-                
-
                 </div>
 
 
