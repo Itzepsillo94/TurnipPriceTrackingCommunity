@@ -30,7 +30,7 @@ function Nabos(props) {
             //Inner loop to create cols
             for (let b = 0; b < 2; b++) {
                 cols.push(<div className="col">
-                    <input id={id} type="text" className="form-control" defaultValue={props.d.precios[id]} onChange={(e)=>{refreshNabos(e,e.target.id)}}/></div>)
+                    <input id={id} type="number" className="form-control" defaultValue={props.d.precios[id]} onChange={(e)=>{refreshNabos(e,e.target.id)}}/></div>)
                 id++
             }
             form.push(<div className="form-row">{cols}</div>)
