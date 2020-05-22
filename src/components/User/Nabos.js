@@ -18,7 +18,26 @@ function Nabos(props) {
     const refreshNabos = (event,idx) => {
         console.log(`Valor precambio: ${precio} y indice ${idx}`)
         precio[idx]=event.target.value;
+        console.log(event.target);
         console.log(`Cambiado a: ${precio} y indice ${idx}`)
+    }
+
+    const formRender = () => {
+        const form = [];
+        let id = 1;
+        // Outer loop to create rows
+        for (let a = 0; a < 6; a++) {
+            let cols = []
+            //Inner loop to create cols
+            for (let b = 0; b < 2; b++) {
+                cols.push(<div className="col">
+                    <input id={id} type="text" className="form-control" defaultValue={props.d.precios[id]} onChange={(e)=>{refreshNabos(e,e.target.id)}}/></div>)
+                console.log(id)
+                id++
+            }
+            form.push(<div className="form-row">{cols}</div>)
+        }
+        return form
     }
 
     return (
@@ -29,7 +48,8 @@ function Nabos(props) {
                         <input type="number" className="form-control" id="pdom" defaultValue={props.d.precios[0]} onChange={(e)=>{refreshNabos(e,0)}}/>
                     </div>
                 </div>
-                <div className="form-row">
+                {formRender()}
+                {/* <div className="form-row">
                     <div className="col">
                         <input type="text" className="form-control" defaultValue={props.d.precios[1]} onChange={(e)=>{refreshNabos(e,1)}}/>
                     </div>
@@ -76,7 +96,7 @@ function Nabos(props) {
                     <div className="col">
                         <input type="text" className="form-control" defaultValue={props.d.precios[12]} onChange={(e)=>{refreshNabos(e,12)}}/>
                     </div>
-                </div>
+                </div> */}
                 <br/>
                 <a href={"#"} className="btn btn-primary" onClick={handleChange}>Calcular</a>
             </form>
