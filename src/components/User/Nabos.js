@@ -1,11 +1,16 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
+
 
 function Nabos(props) {
-    const historia = useHistory();
+    const history = useHistory();
     const [precio, setPrecio] = useState(props.d.precios);
+
+
     const handleChange = (event) => {
+//        setLoad(true);
         const body = {};
         body[props.id] =
         {
@@ -13,13 +18,23 @@ function Nabos(props) {
             userid: props.d.userid
         }
 
-        axios.patch('https://turnipsxdevf.firebaseio.com/nabos.json',body).then(data => setPrecio(precio)).then(historia.push("/"))
+        axios.patch('https://turnipsxdevf.firebaseio.com/nabos.json',body)
+        .then(({data}) => {
+            setPrecio(precio)
+        })
+        
+
+
+    //
     }
     const refreshNabos = (event,idx) => {
+        
         console.log(`Valor precambio: ${precio} y indice ${idx}`)
         precio[idx]=event.target.value;
         console.log(`Cambiado a: ${precio} y indice ${idx}`)
     }
+
+
 
     return (
         <form>
@@ -78,9 +93,16 @@ function Nabos(props) {
                     </div>
                 </div>
                 <br/>
-                <a href={"#"} className="btn btn-primary" onClick={handleChange}>Calcular</a>
+                <a type="submit" className="btn btn-primary" onClick={()=>handleChange()}>Calcular</a>
+                <button type="submit" className="btn btn-primary">Graficar</button>
+
             </form>
     )
 }
 
 export default Nabos
+/* <NavLink className="navbar-brand" activeClassName="disable" to="/">Animal Crossing DevF</NavLink>
+
+                <a className="btn btn-primary" onClick={()=>handleChange()}>Calcular</a>
+       <button onClick={() =>confirmData()} type="submit" className="btn btn-primary">Login</button>
+*/
