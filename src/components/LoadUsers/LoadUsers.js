@@ -12,7 +12,7 @@ const LoadUsers = (props) => {
     const Tag = 'h1';
 
     useEffect(() => {
-        //console.log(props.location.search.substr(6,));
+        console.log(props.location.search.substr(6,));
         const key = props.location.search.substr(6,);
         const URL = `https://${ID_KEY}.firebaseio.com/user/${key}.json`;
         
