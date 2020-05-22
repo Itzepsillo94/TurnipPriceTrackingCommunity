@@ -16,7 +16,7 @@ const Navbar = () => {
             <div className="collapse navbar-collapse" id="navbarText">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                    <NavLink className="nav-link" activeClassName="disable" to="/">Opcion 1</NavLink>
+                    <NavLink className="nav-link" activeClassName="disable" to="/APICharacter">API_Character</NavLink>
                     </li>
                     <li className="nav-item">
                     <NavLink className="nav-link" activeClassName="disable" to="/">Opcion 2</NavLink>
