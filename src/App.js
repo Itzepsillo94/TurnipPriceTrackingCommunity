@@ -8,7 +8,7 @@ import NotFound from './containers/NotFound/NotFound';
 import Login from './containers/Login/Login';
 import './App.css';
 import LoadUsers from './components/LoadUsers/LoadUsers';
-
+import API_Character from './components/API_Character/API_Character'
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route exact path="/add-user" component={createUser}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/user_1" component={LoadUsers}/>
+          <Route exact path="/APICharacter" component={API_Character}/>
           <Route component={NotFound}/>
         </Switch>
       </BrowserRouter>
